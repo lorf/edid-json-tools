@@ -424,7 +424,7 @@ def BuildDescriptor(desc_json):
             "Established Timings III": 0xF7,
             "Error: Reserved/undefined; do not use": 0x11,
             "Dummy descriptor": 0x10,
-            "Manufacturer Specified Display Descriptor": 0x00,  # 0x00 to 0xF6
+            "Manufacturer Specified Display Descriptor": 0x00,  # 0x00 to 0x0F according to EDID 1.4 spec
         }
 
         d[3] = types[atype]
@@ -524,6 +524,9 @@ def BuildDescriptor(desc_json):
 
         elif atype == "Manufacturer Specified Display Descriptor":
             d[5:18] = desc_json["Blob"]
+            # Update tag number if known
+            if "Tag" in desc_json:
+                d[3] = desc_json["Tag"]
 
         elif atype == "Established Timings III":
 
