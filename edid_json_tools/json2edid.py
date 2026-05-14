@@ -984,7 +984,7 @@ def BuildSad(sad_json):
     elif tag <= 0x08 and tag >= 0x02:
         sad[2] = sad_json["Max bit rate"] // 8
 
-    elif tag <= 0x0E and tag <= 0x09:
+    elif tag <= 0x0E and tag >= 0x09:
         sad[2] = sad_json["Value"]
 
     elif sad_json["Type"] == "DRA":  # A type of extension SAD
