@@ -896,10 +896,12 @@ def BuildDataBlock(db_json):
     else:
         raise RuntimeError("Got a data block we can't turn back into EDID")
 
-    length = len(blob) if not extended_tag else len(blob) + 1
+    # Extended tag can be 0x00 for DB_TYPE_VIDEO_CAPABILITY
+    length = len(blob) if extended_tag is None else len(blob) + 1
     header = [(tag << 5) + length]
 
-    if extended_tag:
+    # Extended tag can be 0x00 for DB_TYPE_VIDEO_CAPABILITY
+    if extended_tag is not None:
         header.append(extended_tag)
 
     return header + blob
