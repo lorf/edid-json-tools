@@ -782,7 +782,8 @@ def BuildDataBlock(db_json):
 
         else:  # YCbCr 4:2:0
             tag = 0x07
-            extended_tag = 0x01
+            # "YCbCr 4:2:0 Video Data Block" has Extended tag code 0x0e, not 0x01 (see section 7.5.10 in CTA-861 spec revision G)
+            extended_tag = 0x0e
 
         blob = [BuildSvd(svd) for svd in db_json["Short video descriptors"]]
 
